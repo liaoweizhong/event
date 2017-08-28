@@ -1,0 +1,39 @@
+  var event = function(){
+
+            var data = [];
+
+            var ret = function(func){
+
+                if(typeof func === "function"){
+
+                    data.push(func);
+
+                    return {
+
+                        remove : function(obj){
+
+                            data.splice(data.indexOf(func),1);
+
+                        },
+
+                    }
+
+                }
+
+                for( var i in data ){
+
+                    data[i].apply(this,arguments);
+
+                }
+
+            };
+
+            ret.remove = function(){
+
+                data = [];
+
+            };
+
+            return ret;
+
+        };
