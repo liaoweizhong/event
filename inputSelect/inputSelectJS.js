@@ -91,7 +91,8 @@
                                     div.onclick = function(e){
 
                                         _this.value = e.target.attributes.getNamedItem("value").value;
-
+                                        _this.onchange && _this.onchange();
+                                     
                                     };
                                     this.optionSelect = div;
                                     if(optionStr != "")
