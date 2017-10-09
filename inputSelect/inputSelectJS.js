@@ -9,11 +9,11 @@
             data: {
 
                 test : [
-                    { value: "value", text : "text1" , keyword: "ssssss" },
-                    { value: "value", text : "text2" , keyword: "ass" },
-                    { value: "value", text : "text3" , keyword: "fswqe" },
-                    { value: "value", text : "text4" , keyword: "gjqrnnczv" },
-                    { value: "value", text : "text5" , keyword: "sajdhqwudh" }]
+                    { value: "text1", text : "text1" , keyword: "ssssss" },
+                    { value: "text2", text : "text2" , keyword: "ass" },
+                    { value: "text3", text : "text3" , keyword: "fswqe" },
+                    { value: "text4", text : "text4" , keyword: "gjqrnnczv" },
+                    { value: "text5", text : "text5" , keyword: "sajdhqwudh" }]
 
             }
 
@@ -45,7 +45,7 @@
             if( input ){
                 a = [input];
             }
-         
+
             var className;
             var _class = config.class;
             var _this;
@@ -63,6 +63,17 @@
 
                         if(className[_i] === _class ){
 
+                            _this.onchange = function(e){
+
+                                 if( !this.isChange ) {
+                                     e.stopPropagation();
+                                     return;
+                                 }
+
+                                 this.isChange = false;
+
+                            }
+
                             _this.oninput = function(){
 
                                 var _this = this;
@@ -77,7 +88,7 @@
 
                                     if(it.keyword.indexOf(this.value) > -1 && this.value != "") {
 
-                                        optionStr += "<div style='padding:5px 3px;cursor: pointer;' value='"+it.value+"'>"+ it.text +"</div>"
+                                        optionStr += "<div style=' "+ ( i == data.length - 1 ? "border-bottom:groove 1px;" : "" ) +" border-left: groove 1px;border-right: groove 1px;padding:5px 3px;cursor: pointer;' value='"+it.value+"'>"+ it.text +"</div>"
 
                                     }
 
@@ -86,13 +97,14 @@
                                 if(!this.optionSelect){
 
                                     var div = document.createElement("div");
-                                    div.style.cssText = "border: groove 1px;position:absolute;width:"+ this.offsetWidth +"px;left:"+this.offsetLeft+"px;top:"+ (this.offsetTop + this.offsetHeight) +"px;";
+                                    div.style.cssText = "position:absolute;width:"+ this.offsetWidth +"px;left:"+this.offsetLeft+"px;top:"+ (this.offsetTop + this.offsetHeight) +"px;";
                                     div.innerHTML = optionStr
                                     div.onclick = function(e){
 
                                         _this.value = e.target.attributes.getNamedItem("value").value;
-                                        _this.onchange && _this.onchange();
-                                     
+                                        _this.isChange = true;
+                                        (jQuery && jQuery(_this).change() ) || (_this.onchange && _this.onchange() );
+
                                     };
                                     this.optionSelect = div;
                                     if(optionStr != "")
@@ -108,8 +120,7 @@
                                         this.after(div);
                                     else
                                         div.remove();
-
-
+                                    
                                 }
 
                                 if(!this.onblur) {
