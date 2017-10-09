@@ -38,9 +38,14 @@
 
         };
 
-        this.bind = function(){
+        this.bind = function(input){
 
             var a = document.getElementsByTagName("input");
+
+            if( input ){
+                a = [input];
+            }
+         
             var className;
             var _class = config.class;
             var _this;
