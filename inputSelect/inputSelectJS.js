@@ -1,4 +1,4 @@
-(new function(){
+ window.inputSelect = new function(){
 
         var self = this;
 
@@ -7,7 +7,7 @@
             class: "inputSelect" ,
             attr : "dataName",
             data: {
-                //测试数据
+
                 test : [
                     { value: "value", text : "text1" , keyword: "ssssss" },
                     { value: "value", text : "text2" , keyword: "ass" },
@@ -137,4 +137,4 @@
 
         }();
 
-    })();
+    }();
