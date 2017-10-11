@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-<style>
-	
-</style>
+	<script src='colorArea.js'></script>
 </head>
 <body>
 	
@@ -18,64 +16,13 @@
 
 	var change = function(){
 	
-		document.body.style.backgroundColor = to(k.value,j.value,t.value / 100);
+		document.body.style.backgroundColor = toColor.to(k.value,j.value,t.value / 100);
 	
 	}
 	
 	t.onchange = function(){
 		
 		change();
-	
-	}
-	
-	var to = function(c1,c2,v){
-	
-		c1 = colorToArray(c1);
-		
-		c2 = colorToArray(c2);
-		
-		if( typeof v === "string" && v.indexOf("%") > 0 ){
-		
-			v = parseInt(v) / 100;
-		
-		}
-		
-		c1[0] += parseInt((c2[0] - c1[0]) * v);
-		c1[1] += parseInt((c2[1] - c1[1]) * v);
-		c1[2] += parseInt((c2[2] - c1[2]) * v);
-	
-		return ArrayToColor(c1);
-	
-	}
-	
-	var colorToArray = function(color){
-	
-		if( typeof color === "string" && color.indexOf("#") > -1 ){
-			
-			return hexToArray(color);
-		
-		} 
-		
-	}
-	
-	var ArrayToColor = function(array){
-	
-		var a ,b ,c;
-		
-		return "#" + array[0].toString(16) + array[1].toString(16) + array[2].toString(16); 
-	
-	}
-	
-	var hexToArray = function(color){
-	
-		var i = 1;
-		var a , b , c ;
-		
-		a = parseInt( "0x" + color.substring(i,i+=2) );
-		b = parseInt( "0x" + color.substring(i,i+=2) );
-		c = parseInt( "0x" + color.substring(i,i+=2) );
-	
-		return [a,b,c];
 	
 	}
 
